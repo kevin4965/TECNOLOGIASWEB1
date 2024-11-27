@@ -1,22 +1,14 @@
-# Use root/example as user/password credentials
-version: '3.1'
+version : "3.7"
+services :
+  monolito :
+    container_name : monolito
+    image : monolito:v1
+    build : 
+      context : .
+    ports : 
+      - "4001:4001"
+    networks : 
+     - proyectos-app
 
-services:
-
-  mongo:
-    image: mongo
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
-
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-      - 8081:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: example
-      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
-      ME_CONFIG_BASICAUTH: false
+networks : 
+  proyectos-app :
